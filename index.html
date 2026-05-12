@@ -7,33 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f0f4ff;
-  --bg2: #e8f0fe;
-  --card: #ffffff;
-  --card2: #f8faff;
-  --border: rgba(99,102,241,0.15);
-  --border2: rgba(99,102,241,0.08);
-  --indigo: #6366f1;
-  --indigo-dim: rgba(99,102,241,0.08);
-  --cyan: #06b6d4;
-  --violet: #8b5cf6;
-  --rose: #f43f5e;
-  --amber: #f59e0b;
-  --green: #10b981;
-  --text: #1e1b4b;
-  --text2: #4c4f7a;
-  --text3: #9194b8;
-  --radius: 18px;
-  --radius-sm: 12px;
-  --shadow: 0 4px 24px rgba(99,102,241,0.10), 0 1px 4px rgba(99,102,241,0.06);
-  --shadow-hover: 0 8px 40px rgba(99,102,241,0.18), 0 2px 8px rgba(99,102,241,0.08);
+  --bg:#f0f4ff;--card:#ffffff;--card2:#f8faff;
+  --border:rgba(99,102,241,0.15);--border2:rgba(99,102,241,0.08);
+  --indigo:#6366f1;--cyan:#06b6d4;--violet:#8b5cf6;
+  --rose:#f43f5e;--amber:#f59e0b;--green:#10b981;
+  --text:#1e1b4b;--text2:#4c4f7a;--text3:#9194b8;
+  --radius:18px;--radius-sm:12px;
+  --shadow:0 4px 24px rgba(99,102,241,0.10),0 1px 4px rgba(99,102,241,0.06);
+  --shadow-hover:0 8px 40px rgba(99,102,241,0.18),0 2px 8px rgba(99,102,241,0.08);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Kanit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse 70% 50% at 10% 0%,rgba(99,102,241,0.12) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 100%,rgba(6,182,212,0.10) 0%,transparent 60%);pointer-events:none;}
 .blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.35;pointer-events:none;z-index:0;animation:blobFloat 8s ease-in-out infinite;}
-.blob1{width:320px;height:320px;background:radial-gradient(circle,#a5b4fc,#818cf8);top:-80px;left:-80px;animation-delay:0s;}
+.blob1{width:320px;height:320px;background:radial-gradient(circle,#a5b4fc,#818cf8);top:-80px;left:-80px;}
 .blob2{width:260px;height:260px;background:radial-gradient(circle,#67e8f9,#22d3ee);bottom:-60px;right:-60px;animation-delay:-3s;}
 .blob3{width:200px;height:200px;background:radial-gradient(circle,#fde68a,#fbbf24);top:40%;right:5%;animation-delay:-5s;}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(20px,-20px) scale(1.05);}66%{transform:translate(-10px,15px) scale(0.97);}}
@@ -88,112 +76,77 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradi
 .field input,.field select,.field textarea{width:100%;padding:11px 14px;background:#fafbff;border:1.5px solid #dde3f5;border-radius:var(--radius-sm);font-family:'Kanit',sans-serif;font-size:14.5px;color:var(--text);outline:none;transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239194b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:#fafbff;padding-right:36px;cursor:pointer;}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,0.12);background:#fff;}
-.field textarea{resize:vertical;min-height:72px;}
 .field input[readonly]{background:linear-gradient(135deg,#eef2ff,#e0e7ff);color:var(--indigo);font-weight:700;border-color:rgba(99,102,241,0.25);cursor:default;}
 .defect-type-badge{display:none;margin-top:7px;padding:4px 12px;border-radius:999px;font-family:'Chakra Petch',monospace;font-size:11px;font-weight:600;background:linear-gradient(135deg,#eef2ff,#e0e7ff);color:var(--indigo);border:1px solid rgba(99,102,241,0.2);letter-spacing:.06em;}
 
-/* ── DEFECT STATUS TOGGLE (NEW) ── */
-.defect-status-label {
-  font-family:'Chakra Petch',monospace;
-  font-size:10px;font-weight:700;color:var(--text3);
-  text-transform:uppercase;letter-spacing:.1em;
-  margin-bottom:10px;display:block;
-}
+/* TOGGLE */
+.defect-status-label{font-family:'Chakra Petch',monospace;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;display:block;}
 .defect-status-label .req{color:var(--indigo);}
-
-.toggle-group {
-  display:grid;grid-template-columns:1fr 1fr;gap:12px;
-  margin-bottom:20px;
-}
-
-.toggle-btn {
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  padding:18px 12px;border-radius:16px;cursor:pointer;
-  border:2.5px solid transparent;
-  transition:all .2s cubic-bezier(0.34,1.2,0.64,1);
-  user-select:none;position:relative;overflow:hidden;
-}
-.toggle-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;}
-
-/* NO DEFECT btn */
-.toggle-btn.no-defect-btn {
-  background:linear-gradient(135deg,#f0fdf4,#dcfce7);
-  border-color:#86efac;
-}
+.toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.toggle-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 12px;border-radius:16px;cursor:pointer;border:2.5px solid transparent;transition:all .2s cubic-bezier(0.34,1.2,0.64,1);user-select:none;}
+.toggle-btn.no-defect-btn{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;}
 .toggle-btn.no-defect-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(16,185,129,0.2);}
-.toggle-btn.no-defect-btn.active {
-  background:linear-gradient(135deg,#16a34a,#22c55e);
-  border-color:#16a34a;
-  box-shadow:0 8px 28px rgba(22,163,74,0.35);
-  transform:translateY(-2px);
-}
-.toggle-btn.no-defect-btn.active .btn-icon{filter:brightness(0) invert(1);}
-.toggle-btn.no-defect-btn.active .btn-title{color:#fff;}
-.toggle-btn.no-defect-btn.active .btn-sub{color:rgba(255,255,255,0.8);}
-
-/* FOUND DEFECT btn */
-.toggle-btn.found-defect-btn {
-  background:linear-gradient(135deg,#fff7ed,#fef3c7);
-  border-color:#fcd34d;
-}
+.toggle-btn.no-defect-btn.active{background:linear-gradient(135deg,#16a34a,#22c55e);border-color:#16a34a;box-shadow:0 8px 28px rgba(22,163,74,0.35);transform:translateY(-2px);}
+.toggle-btn.no-defect-btn.active .btn-title,.toggle-btn.no-defect-btn.active .btn-sub{color:#fff;}
+.toggle-btn.found-defect-btn{background:linear-gradient(135deg,#fff7ed,#fef3c7);border-color:#fcd34d;}
 .toggle-btn.found-defect-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(245,158,11,0.2);}
-.toggle-btn.found-defect-btn.active {
-  background:linear-gradient(135deg,#d97706,#f59e0b);
-  border-color:#d97706;
-  box-shadow:0 8px 28px rgba(217,119,6,0.35);
-  transform:translateY(-2px);
-}
-.toggle-btn.found-defect-btn.active .btn-icon{filter:brightness(0) invert(1);}
-.toggle-btn.found-defect-btn.active .btn-title{color:#fff;}
-.toggle-btn.found-defect-btn.active .btn-sub{color:rgba(255,255,255,0.8);}
-
+.toggle-btn.found-defect-btn.active{background:linear-gradient(135deg,#d97706,#f59e0b);border-color:#d97706;box-shadow:0 8px 28px rgba(217,119,6,0.35);transform:translateY(-2px);}
+.toggle-btn.found-defect-btn.active .btn-title,.toggle-btn.found-defect-btn.active .btn-sub{color:#fff;}
 .btn-icon{font-size:32px;line-height:1;}
 .btn-title{font-size:15px;font-weight:700;color:var(--text);}
 .btn-sub{font-family:'Chakra Petch',monospace;font-size:9px;letter-spacing:.08em;color:var(--text3);text-transform:uppercase;}
-
-/* error state for toggle */
-.toggle-group.error .toggle-btn {animation:shake .35s cubic-bezier(0.36,0.07,0.19,0.97);}
+.toggle-group.error .toggle-btn{animation:shake .35s cubic-bezier(0.36,0.07,0.19,0.97);}
 @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
 .toggle-error-msg{display:none;color:var(--rose);font-size:12px;font-weight:600;margin-bottom:12px;padding:8px 14px;background:#fff1f2;border:1px solid #fecdd3;border-radius:10px;}
 .toggle-error-msg.show{display:block;}
-
-/* defect detail section */
 .defect-section{transition:all .35s cubic-bezier(0.34,1.2,0.64,1);}
 .defect-section.hidden{opacity:0;pointer-events:none;max-height:0;overflow:hidden;margin:0;padding:0;}
-.defect-section.visible{opacity:1;max-height:2000px;}
+.defect-section.visible{opacity:1;max-height:9999px;}
 
-/* UPLOAD */
-.upload-zone{border:2px dashed #c7d2fe;border-radius:14px;padding:32px 20px;text-align:center;cursor:pointer;background:linear-gradient(135deg,#fafbff,#f0f4ff);position:relative;transition:border-color .2s,background .2s,box-shadow .2s;}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--indigo);background:linear-gradient(135deg,#eef2ff,#e0e7ff);box-shadow:0 4px 20px rgba(99,102,241,0.12);}
-.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-icon{font-size:40px;margin-bottom:10px;}
-.upload-zone p{font-size:14px;color:var(--text2);}
-.upload-zone p strong{color:var(--indigo);}
-.upload-zone small{font-size:11px;color:var(--text3);display:block;margin-top:6px;}
-#previewWrap{display:none;margin-top:14px;border-radius:12px;overflow:hidden;border:1.5px solid var(--border);position:relative;}
-#previewWrap img{width:100%;max-height:240px;object-fit:contain;background:#f0f4ff;display:block;}
-.preview-label{position:absolute;bottom:0;left:0;right:0;background:rgba(30,27,75,0.6);backdrop-filter:blur(4px);padding:7px 12px;font-size:12px;color:#fff;display:flex;align-items:center;gap:6px;}
-#fileInfo{display:none;margin-top:10px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:1px solid rgba(99,102,241,0.2);border-radius:10px;padding:10px 14px;font-size:13px;align-items:center;gap:10px;}
+/* ── BOX ROWS ── */
+.boxes-list{display:flex;flex-direction:column;gap:16px;margin-top:16px;}
+
+.box-row{background:linear-gradient(135deg,#f8faff,#f0f4ff);border:1.5px solid rgba(99,102,241,0.18);border-radius:14px;padding:16px;position:relative;animation:cardIn .3s cubic-bezier(0.34,1.2,0.64,1) both;}
+
+.box-row-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.box-row-title{font-family:'Chakra Petch',monospace;font-size:11px;font-weight:700;color:var(--indigo);letter-spacing:.1em;text-transform:uppercase;}
+
+.box-delete-btn{background:linear-gradient(135deg,#fff1f2,#ffe4e6);border:1.5px solid #fca5a5;color:#dc2626;border-radius:8px;padding:4px 12px;font-family:'Kanit',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.box-delete-btn:hover{background:linear-gradient(135deg,#dc2626,#f43f5e);color:#fff;border-color:#dc2626;}
+
+/* mini upload per box */
+.mini-upload{border:2px dashed #c7d2fe;border-radius:10px;padding:14px 16px;text-align:center;cursor:pointer;background:#fafbff;position:relative;transition:border-color .2s,background .2s;margin-top:12px;}
+.mini-upload:hover{border-color:var(--indigo);background:#eef2ff;}
+.mini-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.mini-upload-label{font-size:13px;color:var(--text2);}
+.mini-upload-label strong{color:var(--indigo);}
+.mini-preview{margin-top:10px;border-radius:8px;overflow:hidden;border:1.5px solid var(--border);display:none;position:relative;}
+.mini-preview img{width:100%;max-height:160px;object-fit:contain;background:#f0f4ff;display:block;}
+.mini-preview-label{position:absolute;bottom:0;left:0;right:0;background:rgba(30,27,75,0.6);padding:5px 10px;font-size:11px;color:#fff;}
+.mini-file-info{display:none;margin-top:8px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:8px 12px;font-size:12px;align-items:center;gap:8px;}
+
+/* ADD BOX BTN */
+.add-box-btn{width:100%;padding:13px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:2px dashed rgba(99,102,241,0.4);border-radius:14px;color:var(--indigo);font-family:'Kanit',sans-serif;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-top:4px;}
+.add-box-btn:hover{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-color:transparent;transform:translateY(-1px);box-shadow:0 4px 16px rgba(99,102,241,0.3);}
 
 /* SUBMIT */
 .submit-btn{width:100%;padding:16px 20px;background:linear-gradient(135deg,#4f46e5 0%,#6366f1 40%,#8b5cf6 70%,#06b6d4 100%);background-size:200% 100%;color:#fff;font-family:'Kanit',sans-serif;font-size:16px;font-weight:700;border:none;border-radius:14px;cursor:pointer;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(99,102,241,0.35);transition:transform .2s,box-shadow .2s,background-position .4s;}
 .submit-btn::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);transition:left .5s;}
 .submit-btn:hover::before{left:160%;}
-.submit-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(99,102,241,0.45);background-position:100% 0;}
-.submit-btn:active{transform:translateY(-1px);}
+.submit-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(99,102,241,0.45);}
 .submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
 
 /* OVERLAY */
 .overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,12,60,0.55);backdrop-filter:blur(12px);place-items:center;}
 .overlay.active{display:grid;}
-.overlay-box{background:linear-gradient(160deg,#fff 0%,#f0f4ff 60%,#fef9ee 100%);border-radius:28px;padding:48px 40px;text-align:center;width:min(90vw,400px);box-shadow:0 40px 100px rgba(99,102,241,0.25),0 0 0 1.5px rgba(255,255,255,0.9);position:relative;overflow:hidden;animation:popIn .4s cubic-bezier(0.34,1.56,0.64,1);}
+.overlay-box{background:linear-gradient(160deg,#fff 0%,#f0f4ff 60%,#fef9ee 100%);border-radius:28px;padding:48px 40px;text-align:center;width:min(90vw,400px);box-shadow:0 40px 100px rgba(99,102,241,0.25);position:relative;overflow:hidden;animation:popIn .4s cubic-bezier(0.34,1.56,0.64,1);}
 @keyframes popIn{from{opacity:0;transform:scale(0.85);}to{opacity:1;transform:scale(1);}}
 .overlay-box::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#6366f1,#8b5cf6,#f43f5e,#f59e0b,#10b981,#06b6d4,#6366f1);background-size:300% 100%;animation:rainbowSlide 2s linear infinite;}
 @keyframes rainbowSlide{0%{background-position:300% 0}100%{background-position:-300% 0}}
 .spinner-wrap{position:relative;width:72px;height:72px;margin:0 auto 24px;}
 .spinner{width:72px;height:72px;border:4px solid #e0e7ff;border-top-color:#6366f1;border-right-color:#8b5cf6;border-radius:50%;animation:spin .7s linear infinite;}
 .spinner-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border:4px solid #fef3c7;border-bottom-color:#f59e0b;border-left-color:#10b981;border-radius:50%;animation:spin .45s linear infinite reverse;}
-.spinner-dot{position:absolute;top:50%;left:50%;width:10px;height:10px;background:linear-gradient(135deg,#f43f5e,#f59e0b);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 8px rgba(244,63,94,0.5);animation:pulse 1s ease-in-out infinite;}
+.spinner-dot{position:absolute;top:50%;left:50%;width:10px;height:10px;background:linear-gradient(135deg,#f43f5e,#f59e0b);border-radius:50%;transform:translate(-50%,-50%);animation:pulse 1s ease-in-out infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.4);}}
 .overlay-box h3{font-size:20px;font-weight:800;margin-bottom:6px;color:#1e1b4b;}
@@ -203,11 +156,10 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradi
 .progress-pct{font-family:'Chakra Petch',monospace;font-size:14px;font-weight:700;margin-top:10px;background:linear-gradient(90deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
 /* TOAST */
-.toast{display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9998;min-width:280px;max-width:90vw;padding:15px 24px;border-radius:18px;font-size:14px;font-weight:700;align-items:center;gap:12px;animation:toastIn .4s cubic-bezier(0.34,1.56,0.64,1);box-shadow:0 20px 60px rgba(0,0,0,0.2);}
+.toast{display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9998;min-width:280px;max-width:90vw;padding:15px 24px;border-radius:18px;font-size:14px;font-weight:700;align-items:center;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,0.2);}
 .toast.show{display:flex;}
-.toast.success{background:linear-gradient(135deg,#059669,#10b981);color:#fff;box-shadow:0 16px 48px rgba(16,185,129,0.4);}
-.toast.error{background:linear-gradient(135deg,#dc2626,#f43f5e);color:#fff;box-shadow:0 16px 48px rgba(244,63,94,0.4);}
-@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(24px) scale(0.88);}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}}
+.toast.success{background:linear-gradient(135deg,#059669,#10b981);color:#fff;}
+.toast.error{background:linear-gradient(135deg,#dc2626,#f43f5e);color:#fff;}
 option{background:#fff;color:#1e1b4b;}
 optgroup{background:#fff;color:#6366f1;}
 </style>
@@ -233,17 +185,16 @@ optgroup{background:#fff;color:#6366f1;}
   <div class="header-inner">
     <div class="header-badge-group">
       <span class="hbadge">QC System</span>
-      <span class="hbadge gold">v3.1</span>
+      <span class="hbadge gold">v4.0</span>
     </div>
     <div class="header-eyebrow">Quality Control · Defect Inspection</div>
     <h1>แบบฟอร์มตรวจกล่อง<br>และพาเลท Defect</h1>
-    <p class="header-sub">กรอกข้อมูลให้ครบถ้วน · เลือกจาก Dropdown · แนบรูปหลักฐาน</p>
+    <p class="header-sub">กรอกข้อมูลให้ครบถ้วน · เพิ่มได้หลายกล่อง · แนบรูปต่อกล่อง</p>
   </div>
 </div>
 
 <div class="container">
   <p class="required-note"><span>*</span> จำเป็นต้องกรอก</p>
-
   <form id="defectForm" novalidate>
 
     <!-- S1: ข้อมูลทั่วไป -->
@@ -273,24 +224,7 @@ optgroup{background:#fff;color:#6366f1;}
               <option value="">— เลือกกะก่อน —</option>
             </select>
           </div>
-          <div class="field">
-            <label>M/C No. <span class="req">*</span></label>
-            <select name="mcNo" required>
-              <option value="">— เลือก M/C —</option>
-              <option value="All">✦ ทุกเครื่อง (All)</option>
-              <option value="B">B</option><option value="C">C</option>
-              <option value="H">H</option><option value="S">S</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Size <span class="req">*</span></label>
-            <select name="size" required>
-              <option value="">— เลือก Size —</option>
-              <option value="All">✦ ทุก Size (All)</option>
-              <option value="72g">72g</option><option value="250g">250g</option>
-              <option value="500g">500g</option><option value="1kg">1kg</option>
-            </select>
-          </div>
+
           <div class="field">
             <label>Robot / ลูกกะ</label>
             <input type="text" name="robot" id="robotInput" placeholder="ชื่อ Robot / ลูกกะ">
@@ -307,7 +241,6 @@ optgroup{background:#fff;color:#6366f1;}
       </div>
       <div class="section-body">
 
-        <!-- ── NEW: 2-button toggle ── -->
         <span class="defect-status-label">ผลการตรวจสอบ <span class="req">*</span></span>
         <div class="toggle-group" id="toggleGroup">
           <div class="toggle-btn no-defect-btn" id="btnNoDefect" onclick="setDefectStatus('none')">
@@ -324,97 +257,29 @@ optgroup{background:#fff;color:#6366f1;}
         <div class="toggle-error-msg" id="toggleErrorMsg">⚠️ กรุณาเลือกผลการตรวจสอบก่อนส่ง</div>
         <input type="hidden" name="defectStatus" id="defectStatusInput" value="">
 
-        <!-- defect detail section -->
         <div class="defect-section hidden" id="defectSection">
 
-          <!-- dropdown: แสดงเฉพาะ พบ Defect -->
-          <div id="defectDetailRow" style="display:none">
-          <div class="grid">
-            <div class="field">
-              <label>รายละเอียด Defect <span class="req">*</span></label>
-              <select name="defectDetail" id="defectDetailSelect">
-                <option value="">— เลือกรายละเอียด Defect —</option>
-                <optgroup label="📅 Date Printing">
-                  <option value="ตัวอักษรไม่คมชัด (หมึกไม่เต็ม ตัวอักษรแหว่ง)" data-type="Date printing">ตัวอักษรไม่คมชัด (หมึกไม่เต็ม ตัวอักษรแหว่ง)</option>
-                  <option value="หมึกสีซีดจาง" data-type="Date printing">หมึกสีซีดจาง</option>
-                  <option value="ตัวอักษรไม่ครบตาม Std." data-type="Date printing">ตัวอักษรไม่ครบตาม Std.</option>
-                  <option value="Lot/Date printing ผิด" data-type="Date printing">Lot/Date printing ผิด</option>
-                  <option value="ไม่มี Date printing" data-type="Date printing">ไม่มี Date printing</option>
-                </optgroup>
-                <optgroup label="🩹 เปื้อน / สกปรก">
-                  <option value="Artwork เปื้อนจากการพิมพ์" data-type="เปื้อน, สกปรก">Artwork เปื้อนจากการพิมพ์</option>
-                  <option value="มีคราบสารเคมี จารบี หรือ น้ำมัน" data-type="เปื้อน, สกปรก">มีคราบสารเคมี จารบี หรือ น้ำมัน</option>
-                  <option value="เปื้อนคราบหมึก หรือปากกา" data-type="เปื้อน, สกปรก">เปื้อนคราบหมึก หรือปากกา</option>
-                </optgroup>
-                <optgroup label="🧫 Contaminate">
-                  <option value="มีคราบฝุ่น หรือเขม่าบนบรรจุภัณฑ์" data-type="Contaminate">มีคราบฝุ่น หรือเขม่าบนบรรจุภัณฑ์</option>
-                  <option value="มีผง หรือผลึก product ค้างหรือติดที่บรรจุภัณฑ์" data-type="Contaminate">มีผง หรือผลึก product ค้างบรรจุภัณฑ์</option>
-                  <option value="มีเทป หรือกาว ติดในตำแหน่งที่ไม่ถูกต้อง" data-type="Contaminate">มีเทป หรือกาว ติดในตำแหน่งที่ไม่ถูกต้อง</option>
-                  <option value="มีแมลงติดอยู่ที่ฟิล์มยืด หรือพันฟิล์มทับแมลง" data-type="Contaminate">มีแมลงติดที่ฟิล์มยืด</option>
-                  <option value="มีเส้นผมติดที่เทป หรือบรรจุภัณฑ์" data-type="Contaminate">มีเส้นผมติดที่เทป หรือบรรจุภัณฑ์</option>
-                </optgroup>
-                <optgroup label="📦 กล่องแตก / ชำรุด">
-                  <option value="กล่องแตก" data-type="กล่องแตก / ชำรุด">กล่องแตก</option>
-                  <option value="กล่องโดนเจาะเป็นรู" data-type="กล่องแตก / ชำรุด">กล่องโดนเจาะเป็นรู</option>
-                  <option value="กล่องถลอก หรือมีร่องรอยของการลอกล่อน" data-type="กล่องแตก / ชำรุด">กล่องถลอก หรือมีร่องรอยของการลอกล่อน</option>
-                  <option value="กล่องเบี้ยว เสียรูป" data-type="กล่องแตก / ชำรุด">กล่องเบี้ยว เสียรูป</option>
-                  <option value="ฝากล่องห่างเกินกำหนด (>1.2 CM)" data-type="กล่องแตก / ชำรุด">ฝากล่องห่างเกินกำหนด (&gt;1.2 CM)</option>
-                  <option value="ฝากล่องปิดไม่ดี" data-type="กล่องแตก / ชำรุด">ฝากล่องปิดไม่ดี</option>
-                </optgroup>
-                <optgroup label="🎁 OPP Tape Incomplete">
-                  <option value="OPP ติดไม่สนิท ลอกได้" data-type="OPP tape incomplete">OPP ติดไม่สนิท ลอกได้</option>
-                  <option value="OPP สั้นเกินไป" data-type="OPP tape incomplete">OPP สั้นเกินไป</option>
-                  <option value="OPP ยาวเกินไป" data-type="OPP tape incomplete">OPP ยาวเกินไป</option>
-                  <option value="OPP ขาด/ติดทับ" data-type="OPP tape incomplete">OPP ขาด/ติดทับ</option>
-                  <option value="ไม่ติด OPP เทป" data-type="OPP tape incomplete">ไม่ติด OPP เทป</option>
-                  <option value="OPP เทปพับ" data-type="OPP tape incomplete">OPP เทปพับ</option>
-                  <option value="OPP ติดไม่ตรง เบี้ยว เอียง ไม่ได้ระยะ" data-type="OPP tape incomplete">OPP ติดไม่ตรง เบี้ยว เอียง</option>
-                  <option value="ติด OPP ทับถุง PE bag" data-type="OPP tape incomplete">ติด OPP ทับถุง PE bag</option>
-                </optgroup>
-                <optgroup label="🖼️ Artwork Incomplete">
-                  <option value="Artwork ไม่สมบูรณ์" data-type="Artwork incomplete">Artwork ไม่สมบูรณ์</option>
-                  <option value="Artwork สีถลอก หรือซีดจาง หรือสีผิดปกติ" data-type="Artwork incomplete">Artwork สีถลอก / ซีดจาง / สีผิดปกติ</option>
-                  <option value="Artwork ไม่ถูกต้อง" data-type="Artwork incomplete">Artwork ไม่ถูกต้อง</option>
-                </optgroup>
-                <optgroup label="🔧 Other">
-                  <option value="ป้าย WMS ลงข้อมูลไม่ถูกต้อง" data-type="Other">ป้าย WMS ลงข้อมูลไม่ถูกต้อง</option>
-                  <option value="พบกล่องเปียกน้ำ" data-type="Other">พบกล่องเปียกน้ำ</option>
-                  <option value="เก็บซองหรือถุง PE ไม่เรียบร้อย" data-type="Other">เก็บซองหรือถุง PE ไม่เรียบร้อย</option>
-                  <option value="เรียงกล่องห่าง" data-type="Other">เรียงกล่องห่าง</option>
-                  <option value="พาเลท เปียกน้ำ" data-type="Other">พาเลท เปียกน้ำ</option>
-                  <option value="พาเลทมีคราบสารเคมี น้ำมัน สารหล่อลื่น" data-type="Other">พาเลทมีคราบสารเคมี น้ำมัน</option>
-                  <option value="อื่นๆ" data-type="-">อื่นๆ (ระบุในหมายเหตุ)</option>
-                </optgroup>
-              </select>
-              <span class="defect-type-badge" id="defectTypeBadge"></span>
-            </div>
-            <div class="field">
-              <label>ประเภท Defect</label>
-              <input type="text" name="defectType" id="defectTypeInput" placeholder="เติมอัตโนมัติ" readonly>
-            </div>
-          </div>
-          </div><!-- /defectDetailRow -->
 
-          <!-- ช่องเหล่านี้แสดงทั้ง พบ และ ไม่พบ Defect -->
-          <div class="grid grid-3" style="margin-top:14px">
-            <div class="field">
-              <label>เลขกล่อง</label>
-              <input type="text" name="boxNo" placeholder="0001">
-            </div>
-            <div class="field">
-              <label>เวลา (Defect)</label>
-              <input type="time" name="defectTime">
-            </div>
-            <div class="field">
-              <label>Pallet No.</label>
-              <input type="text" name="palletNo" placeholder="1">
-            </div>
+
+          <!-- ── กล่องที่พบ (dynamic rows) ── -->
+          <div id="boxesSection" style="margin-top:18px">
+            <span class="defect-status-label" style="margin-bottom:8px">📦 กล่องที่พบ</span>
+            <div class="boxes-list" id="boxesList"></div>
+            <button type="button" class="add-box-btn" id="addBoxBtn" onclick="addBoxRow()">
+              ＋ เพิ่มกล่อง
+            </button>
           </div>
-          <div class="grid grid-2" style="margin-top:14px">
-            <div class="field">
-              <label>เวลาคืน</label>
-              <input type="time" name="returnTime">
-            </div>
+
+          <!-- ไม่พบ Defect: dynamic boxes (M/C, Size, กล่อง, เวลา, Pallet, เวลาคืน) -->
+          <div id="noDefectFields" style="display:none;margin-top:4px">
+            <div class="boxes-list" id="ndBoxesList"></div>
+            <button type="button" class="add-box-btn" onclick="addNdBoxRow()">
+              ＋ เพิ่มกล่อง
+            </button>
+          </div>
+
+          <!-- หมายเหตุ (เฉพาะตอน พบ Defect) -->
+          <div class="grid" style="margin-top:16px" id="foundRemark">
             <div class="field">
               <label>หมายเหตุ</label>
               <input type="text" name="remark" placeholder="ข้อมูลเพิ่มเติม">
@@ -450,33 +315,6 @@ optgroup{background:#fff;color:#6366f1;}
         </div>
       </div>
     </div>
-
-    <!-- S4: แนบไฟล์ -->
-    <div class="section-card">
-      <div class="section-header">
-        <div class="section-icon green">📎</div>
-        <h2>แนบรูปหลักฐาน <span class="sub">Photo Attachment</span></h2>
-      </div>
-      <div class="section-body">
-        <div class="upload-zone" id="uploadZone">
-          <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx">
-          <div class="upload-icon">📷</div>
-          <p><strong>คลิกเพื่อเลือกไฟล์</strong> หรือลากมาวางที่นี่</p>
-          <small>PDF · JPG · PNG · DOC · DOCX · XLS · XLSX &nbsp;|&nbsp; ไม่เกิน 10 MB</small>
-        </div>
-        <div id="fileInfo" style="display:none;margin-top:10px;background:linear-gradient(135deg,#eef2ff,#e0e7ff);border:1px solid rgba(99,102,241,0.2);border-radius:10px;padding:10px 14px;font-size:13px;align-items:center;gap:10px;">
-          <span id="fileIcon" style="font-size:22px">📄</span>
-          <div>
-            <div id="fileName" style="font-weight:600;color:var(--text)"></div>
-            <div id="fileSize" style="font-size:11px;color:var(--text3);margin-top:2px"></div>
-          </div>
-        </div>
-        <div id="previewWrap">
-          <img id="previewImg" alt="">
-          <div class="preview-label"><span>🖼️</span><span id="previewName"></span></div>
-        </div>
-      </div>
-    </div>
   </form>
 
   <button type="submit" class="submit-btn" id="submitBtn" form="defectForm">
@@ -486,14 +324,17 @@ optgroup{background:#fff;color:#6366f1;}
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyP9DE4M2Er4jimIqYW1zOARLpE7UjzqFlPFRQbHNiP5ZZZFYOtKCy0EkvchRkfdQ3X/exec';
-
 const ROUNDS = {
-  '1': ['10.00','11.30','13.00','14.30','15.45'],
-  '2': ['17.30','19.30','21.00','22.30','23.45'],
-  '3': ['02.00','03.30','05.00','06.30','07.45']
+  '1':['10.00','11.30','13.00','14.30','15.45'],
+  '2':['17.30','19.30','21.00','22.30','23.45'],
+  '3':['02.00','03.30','05.00','06.30','07.45']
 };
+const EXT_ICONS = {pdf:'📕',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',doc:'📘',docx:'📘',xls:'📗',xlsx:'📗'};
 
-// ── Init date ──
+let defectStatus = '';
+let boxCount = 0;
+
+// ── Init ──
 document.getElementById('date').valueAsDate = new Date();
 
 // ── Shift → round ──
@@ -501,230 +342,463 @@ document.getElementById('shiftSel').addEventListener('change', function() {
   const sel = document.getElementById('roundSelect');
   sel.innerHTML = '<option value="">— เลือกรอบตรวจ —</option>';
   if (this.value && ROUNDS[this.value]) {
-    const allOpt = document.createElement('option');
-    allOpt.value = 'All น.'; allOpt.textContent = '✦ ทุกรอบ (All)';
-    sel.appendChild(allOpt);
+    const a = document.createElement('option');
+    a.value='All น.'; a.textContent='✦ ทุกรอบ (All)'; sel.appendChild(a);
     ROUNDS[this.value].forEach(r => {
       const o = document.createElement('option');
-      o.value = r + ' น.'; o.textContent = r + ' น.';
-      sel.appendChild(o);
+      o.value=r+' น.'; o.textContent=r+' น.'; sel.appendChild(o);
     });
   }
 });
 
-// ── Defect detail → type ──
-document.getElementById('defectDetailSelect').addEventListener('change', function() {
-  const t = this.options[this.selectedIndex].dataset.type || '';
-  document.getElementById('defectTypeInput').value = t;
-  const badge = document.getElementById('defectTypeBadge');
-  if (t && t !== '-') { badge.textContent = '◈ ' + t; badge.style.display = 'inline-block'; }
-  else { badge.style.display = 'none'; }
-});
+// Defect type now handled per-box via updateBoxDefectType()
 
-// ── NEW: Toggle defect status ──
-let defectStatus = ''; // 'none' | 'found'
-
+// ── Toggle defect status ──
 function setDefectStatus(status) {
   defectStatus = status;
   document.getElementById('defectStatusInput').value = status;
+  document.getElementById('toggleErrorMsg').classList.remove('show');
+  document.getElementById('btnNoDefect').classList.toggle('active', status==='none');
+  document.getElementById('btnFoundDefect').classList.toggle('active', status==='found');
 
-  const btnNo = document.getElementById('btnNoDefect');
-  const btnFound = document.getElementById('btnFoundDefect');
   const section = document.getElementById('defectSection');
-  const detailRow = document.getElementById('defectDetailRow');
-  const errMsg = document.getElementById('toggleErrorMsg');
+  const boxesSection = document.getElementById('boxesSection');
 
-  errMsg.classList.remove('show');
-  btnNo.classList.toggle('active', status === 'none');
-  btnFound.classList.toggle('active', status === 'found');
-
-  // Always show the section (เลขกล่อง/เวลา/pallet/เวลาคืน/หมายเหตุ)
-  section.classList.remove('hidden');
-  section.classList.add('visible');
+  section.classList.remove('hidden'); section.classList.add('visible');
 
   if (status === 'found') {
-    // Show defect detail row + make required
-    detailRow.style.display = 'grid';
-    document.getElementById('defectDetailSelect').setAttribute('required', '');
+    boxesSection.style.display = 'block';
+    document.getElementById('noDefectFields').style.display = 'none';
+    document.getElementById('foundRemark').style.display = 'grid';
+    if (document.getElementById('boxesList').children.length === 0) addBoxRow();
   } else {
-    // Hide only defect detail dropdown, keep other fields
-    detailRow.style.display = 'none';
-    document.getElementById('defectDetailSelect').removeAttribute('required');
-    document.getElementById('defectDetailSelect').value = '';
-    document.getElementById('defectTypeInput').value = 'ไม่พบ defect';
-    document.getElementById('defectTypeBadge').style.display = 'none';
+    // ไม่พบ Defect: แสดงช่องกรอกข้อมูลกล่องปกติ (1 row, ไม่มีปุ่มเพิ่ม)
+    boxesSection.style.display = 'none';
+    document.getElementById('noDefectFields').style.display = 'block';
+    document.getElementById('foundRemark').style.display = 'none';
+    if (document.getElementById('ndBoxesList').children.length === 0) addNdBoxRow();
   }
 }
 
-// ── File upload ──
-const fileInput = document.getElementById('fileInput');
-const uploadZone = document.getElementById('uploadZone');
-const previewWrap = document.getElementById('previewWrap');
-const EXT_ICONS = {pdf:'📕',jpg:'🖼️',jpeg:'🖼️',png:'🖼️',doc:'📘',docx:'📘',xls:'📗',xlsx:'📗'};
+// ── Update defect type label per box ──
+function updateBoxDefectType(sel) {
+  // no-op: type stored as data-type on option, collected at submit
+}
 
-function handleFile(f) {
-  if (!f) return;
+// ── Add NO-DEFECT box row (M/C, Size, กล่อง, เวลา, Pallet, เวลาคืน) ──
+let ndBoxCount = 0;
+function addNdBoxRow() {
+  ndBoxCount++;
+  const id = 'nd_' + ndBoxCount;
+  const list = document.getElementById('ndBoxesList');
+
+  const row = document.createElement('div');
+  row.className = 'box-row';
+  row.dataset.ndBoxId = id;
+  row.innerHTML = `
+    <div class="box-row-header">
+      <span class="box-row-title">📦 กล่องที่ ${list.children.length + 1}</span>
+      <button type="button" class="box-delete-btn" onclick="removeNdBoxRow(this)">🗑️ ลบ</button>
+    </div>
+    <div class="grid grid-2" style="margin-bottom:12px">
+      <div class="field">
+        <label>M/C No.</label>
+        <select class="nd-mcNo">
+          <option value="">— เลือก M/C —</option>
+          <option value="All">✦ ทุกเครื่อง</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="H">H</option>
+          <option value="S">S</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Size</label>
+        <select class="nd-size">
+          <option value="">— เลือก Size —</option>
+          <option value="All">✦ ทุก Size</option>
+          <option value="72g">72g</option>
+          <option value="250g">250g</option>
+          <option value="500g">500g</option>
+          <option value="1kg">1kg</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      <div class="field">
+        <label>เลขกล่อง</label>
+        <input type="text" class="nd-boxNo" placeholder="0001">
+      </div>
+      <div class="field">
+        <label>เวลา (ตรวจ)</label>
+        <input type="time" class="nd-defectTime">
+      </div>
+      <div class="field">
+        <label>Pallet No.</label>
+        <input type="text" class="nd-palletNo" placeholder="1">
+      </div>
+    </div>
+    <div class="grid grid-2" style="margin-top:12px">
+      <div class="field">
+        <label>เวลาคืน</label>
+        <input type="time" class="nd-returnTime">
+      </div>
+    </div>
+  `;
+  list.appendChild(row);
+  renumberNdBoxRows();
+}
+
+function removeNdBoxRow(btn) {
+  const row = btn.closest('.box-row');
+  row.style.opacity = '0';
+  row.style.transform = 'scale(0.95)';
+  row.style.transition = 'all .2s';
+  setTimeout(() => { row.remove(); renumberNdBoxRows(); }, 200);
+}
+
+function renumberNdBoxRows() {
+  document.querySelectorAll('#ndBoxesList .box-row').forEach((row, i) => {
+    row.querySelector('.box-row-title').textContent = `📦 กล่องที่ ${i+1}`;
+  });
+}
+
+// ── Add box row ──
+function addBoxRow() {
+  boxCount++;
+  const id = boxCount;
+  const list = document.getElementById('boxesList');
+
+  const row = document.createElement('div');
+  row.className = 'box-row';
+  row.dataset.boxId = id;
+  row.innerHTML = `
+    <div class="box-row-header">
+      <span class="box-row-title">📦 กล่องที่ ${list.children.length + 1}</span>
+      <button type="button" class="box-delete-btn" onclick="removeBoxRow(this)">🗑️ ลบ</button>
+    </div>
+
+    <div class="grid grid-3" style="margin-bottom:12px">
+      <div class="field">
+        <label>M/C No.</label>
+        <select class="box-mcNo">
+          <option value="">— เลือก M/C —</option>
+          <option value="All">✦ ทุกเครื่อง</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="H">H</option>
+          <option value="S">S</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Size</label>
+        <select class="box-size">
+          <option value="">— เลือก Size —</option>
+          <option value="All">✦ ทุก Size</option>
+          <option value="72g">72g</option>
+          <option value="250g">250g</option>
+          <option value="500g">500g</option>
+          <option value="1kg">1kg</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>ประเภท Defect</label>
+        <select class="box-defectDetail" onchange="updateBoxDefectType(this)">
+          <option value="" data-type="">— เลือก Defect —</option>
+          <optgroup label="📅 Date Printing">
+            <option value="ตัวอักษรไม่คมชัด (หมึกไม่เต็ม ตัวอักษรแหว่ง)" data-type="Date printing">ตัวอักษรไม่คมชัด</option>
+            <option value="หมึกสีซีดจาง" data-type="Date printing">หมึกสีซีดจาง</option>
+            <option value="ตัวอักษรไม่ครบตาม Std." data-type="Date printing">ตัวอักษรไม่ครบตาม Std.</option>
+            <option value="Lot/Date printing ผิด" data-type="Date printing">Lot/Date printing ผิด</option>
+            <option value="ไม่มี Date printing" data-type="Date printing">ไม่มี Date printing</option>
+          </optgroup>
+          <optgroup label="🩹 เปื้อน / สกปรก">
+            <option value="Artwork เปื้อนจากการพิมพ์" data-type="เปื้อน, สกปรก">Artwork เปื้อนจากการพิมพ์</option>
+            <option value="มีคราบสารเคมี จารบี หรือ น้ำมัน" data-type="เปื้อน, สกปรก">มีคราบสารเคมี จารบี น้ำมัน</option>
+            <option value="เปื้อนคราบหมึก หรือปากกา" data-type="เปื้อน, สกปรก">เปื้อนคราบหมึก / ปากกา</option>
+          </optgroup>
+          <optgroup label="🧫 Contaminate">
+            <option value="มีคราบฝุ่น หรือเขม่าบนบรรจุภัณฑ์" data-type="Contaminate">มีคราบฝุ่น / เขม่า</option>
+            <option value="มีผง หรือผลึก product ค้างหรือติดที่บรรจุภัณฑ์" data-type="Contaminate">มีผง / ผลึก product</option>
+            <option value="มีเทป หรือกาว ติดในตำแหน่งที่ไม่ถูกต้อง" data-type="Contaminate">มีเทป / กาว ผิดตำแหน่ง</option>
+            <option value="มีแมลงติดอยู่ที่ฟิล์มยืด หรือพันฟิล์มทับแมลง" data-type="Contaminate">มีแมลงติดฟิล์มยืด</option>
+            <option value="มีเส้นผมติดที่เทป หรือบรรจุภัณฑ์" data-type="Contaminate">มีเส้นผมติดเทป</option>
+          </optgroup>
+          <optgroup label="📦 กล่องแตก / ชำรุด">
+            <option value="กล่องแตก" data-type="กล่องแตก / ชำรุด">กล่องแตก</option>
+            <option value="กล่องโดนเจาะเป็นรู" data-type="กล่องแตก / ชำรุด">กล่องโดนเจาะเป็นรู</option>
+            <option value="กล่องถลอก หรือมีร่องรอยของการลอกล่อน" data-type="กล่องแตก / ชำรุด">กล่องถลอก / ลอกล่อน</option>
+            <option value="กล่องเบี้ยว เสียรูป" data-type="กล่องแตก / ชำรุด">กล่องเบี้ยว เสียรูป</option>
+            <option value="ฝากล่องห่างเกินกำหนด (>1.2 CM)" data-type="กล่องแตก / ชำรุด">ฝากล่องห่างเกิน 1.2CM</option>
+            <option value="ฝากล่องปิดไม่ดี" data-type="กล่องแตก / ชำรุด">ฝากล่องปิดไม่ดี</option>
+          </optgroup>
+          <optgroup label="🎁 OPP Tape">
+            <option value="OPP ติดไม่สนิท ลอกได้" data-type="OPP tape incomplete">OPP ติดไม่สนิท</option>
+            <option value="OPP สั้นเกินไป" data-type="OPP tape incomplete">OPP สั้นเกินไป</option>
+            <option value="OPP ยาวเกินไป" data-type="OPP tape incomplete">OPP ยาวเกินไป</option>
+            <option value="OPP ขาด/ติดทับ" data-type="OPP tape incomplete">OPP ขาด/ติดทับ</option>
+            <option value="ไม่ติด OPP เทป" data-type="OPP tape incomplete">ไม่ติด OPP เทป</option>
+            <option value="OPP เทปพับ" data-type="OPP tape incomplete">OPP เทปพับ</option>
+            <option value="OPP ติดไม่ตรง เบี้ยว เอียง ไม่ได้ระยะ" data-type="OPP tape incomplete">OPP ติดไม่ตรง / เบี้ยว</option>
+            <option value="ติด OPP ทับถุง PE bag" data-type="OPP tape incomplete">OPP ทับถุง PE bag</option>
+          </optgroup>
+          <optgroup label="🖼️ Artwork">
+            <option value="Artwork ไม่สมบูรณ์" data-type="Artwork incomplete">Artwork ไม่สมบูรณ์</option>
+            <option value="Artwork สีถลอก หรือซีดจาง หรือสีผิดปกติ" data-type="Artwork incomplete">Artwork สีถลอก / ซีดจาง</option>
+            <option value="Artwork ไม่ถูกต้อง" data-type="Artwork incomplete">Artwork ไม่ถูกต้อง</option>
+          </optgroup>
+          <optgroup label="🔧 Other">
+            <option value="ป้าย WMS ลงข้อมูลไม่ถูกต้อง" data-type="Other">ป้าย WMS ไม่ถูกต้อง</option>
+            <option value="พบกล่องเปียกน้ำ" data-type="Other">กล่องเปียกน้ำ</option>
+            <option value="เก็บซองหรือถุง PE ไม่เรียบร้อย" data-type="Other">ซอง/ถุง PE ไม่เรียบร้อย</option>
+            <option value="เรียงกล่องห่าง" data-type="Other">เรียงกล่องห่าง</option>
+            <option value="พาเลท เปียกน้ำ" data-type="Other">พาเลทเปียกน้ำ</option>
+            <option value="พาเลทมีคราบสารเคมี น้ำมัน สารหล่อลื่น" data-type="Other">พาเลทมีคราบสารเคมี</option>
+            <option value="อื่นๆ" data-type="-">อื่นๆ (ระบุหมายเหตุ)</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="field">
+        <label>เลขกล่อง</label>
+        <input type="text" class="box-boxNo" placeholder="0001">
+      </div>
+      <div class="field">
+        <label>เวลา (Defect)</label>
+        <input type="time" class="box-defectTime">
+      </div>
+      <div class="field">
+        <label>Pallet No.</label>
+        <input type="text" class="box-palletNo" placeholder="1">
+      </div>
+    </div>
+    <div class="grid grid-2" style="margin-top:12px">
+      <div class="field">
+        <label>เวลาคืน</label>
+        <input type="time" class="box-returnTime">
+      </div>
+      <div class="field" style="display:flex;align-items:flex-end">
+        <div style="width:100%">
+          <label>รูปหลักฐาน</label>
+          <div class="mini-upload" id="miniUpload_${id}">
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf" onchange="handleMiniFile(this, ${id})">
+            <div class="mini-upload-label">📷 <strong>แนบรูป</strong> กล่องนี้</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mini-file-info" id="miniInfo_${id}">
+      <span id="miniIcon_${id}" style="font-size:18px">📄</span>
+      <span id="miniName_${id}" style="font-size:12px;font-weight:600;color:var(--text)"></span>
+    </div>
+    <div class="mini-preview" id="miniPreview_${id}">
+      <img id="miniImg_${id}" alt="">
+      <div class="mini-preview-label" id="miniPreviewName_${id}"></div>
+    </div>
+  `;
+  list.appendChild(row);
+  renumberBoxRows();
+}
+
+function removeBoxRow(btn) {
+  const row = btn.closest('.box-row');
+  row.style.animation = 'none';
+  row.style.opacity = '0';
+  row.style.transform = 'scale(0.95)';
+  row.style.transition = 'all .2s';
+  setTimeout(() => { row.remove(); renumberBoxRows(); }, 200);
+}
+
+function renumberBoxRows() {
+  document.querySelectorAll('.box-row').forEach((row, i) => {
+    row.querySelector('.box-row-title').textContent = `📦 กล่องที่ ${i+1}`;
+  });
+}
+
+// ── Mini file handler ──
+function handleMiniFile(input, id) {
+  const f = input.files[0]; if (!f) return;
   const ext = f.name.split('.').pop().toLowerCase();
-  if (f.size > 10*1024*1024) { showToast('❌ ไฟล์เกิน 10 MB', 'error'); fileInput.value=''; return; }
-  const fi = document.getElementById('fileInfo'); fi.style.display = 'flex';
-  document.getElementById('fileIcon').textContent = EXT_ICONS[ext] || '📄';
-  document.getElementById('fileName').textContent = f.name;
-  document.getElementById('fileSize').textContent = f.size < 1024*1024 ? (f.size/1024).toFixed(1)+' KB' : (f.size/1024/1024).toFixed(2)+' MB';
+  if (f.size > 10*1024*1024) { showToast('❌ ไฟล์เกิน 10 MB','error'); input.value=''; return; }
+  const info = document.getElementById('miniInfo_'+id); info.style.display='flex';
+  document.getElementById('miniIcon_'+id).textContent = EXT_ICONS[ext]||'📄';
+  document.getElementById('miniName_'+id).textContent = f.name + ' (' + (f.size<1024*1024?(f.size/1024).toFixed(1)+' KB':(f.size/1024/1024).toFixed(2)+' MB') + ')';
   if (['jpg','jpeg','png'].includes(ext)) {
     const r = new FileReader();
-    r.onload = e => { document.getElementById('previewImg').src=e.target.result; document.getElementById('previewName').textContent=f.name; previewWrap.style.display='block'; };
+    r.onload = e => {
+      document.getElementById('miniImg_'+id).src = e.target.result;
+      document.getElementById('miniPreviewName_'+id).textContent = f.name;
+      document.getElementById('miniPreview_'+id).style.display = 'block';
+    };
     r.readAsDataURL(f);
-  } else { previewWrap.style.display = 'none'; }
+  } else {
+    document.getElementById('miniPreview_'+id).style.display='none';
+  }
 }
-fileInput.addEventListener('change', () => handleFile(fileInput.files[0]));
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag'); if(e.dataTransfer.files[0]){fileInput.files=e.dataTransfer.files;handleFile(e.dataTransfer.files[0]);} });
 
-// ── Progress ──
+// ── Progress / Toast ──
 let pInt;
-function startProgress() {
+function startProgress(){
   let v=0; const fill=document.getElementById('progressFill'); const pct=document.getElementById('progressPct');
-  pInt = setInterval(()=>{ v=Math.min(v+Math.random()*8,85); fill.style.width=v+'%'; pct.textContent=Math.round(v)+'%'; },220);
+  pInt=setInterval(()=>{v=Math.min(v+Math.random()*6,85);fill.style.width=v+'%';pct.textContent=Math.round(v)+'%';},220);
 }
-function finishProgress(ok) {
+function finishProgress(ok){
   clearInterval(pInt);
   document.getElementById('progressFill').style.width='100%';
   document.getElementById('progressPct').textContent='100%';
-  document.getElementById('overlayStatus').textContent = ok ? '✅ เสร็จสิ้น!' : '❌ เกิดข้อผิดพลาด';
+  document.getElementById('overlayStatus').textContent=ok?'✅ เสร็จสิ้น!':'❌ เกิดข้อผิดพลาด';
 }
-function showToast(msg, type='success') {
+function showToast(msg,type='success'){
   const t=document.getElementById('toast'); t.textContent=msg; t.className='toast '+type+' show';
-  setTimeout(()=>t.className='toast', 4500);
+  setTimeout(()=>t.className='toast',4500);
 }
 
 // ── Submit ──
 document.getElementById('defectForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  // 1. Check defect status toggle
+  // 1. Check toggle
   if (!defectStatus) {
-    const grp = document.getElementById('toggleGroup');
-    const err = document.getElementById('toggleErrorMsg');
-    grp.classList.add('error');
-    err.classList.add('show');
-    setTimeout(() => grp.classList.remove('error'), 400);
-    err.scrollIntoView({ behavior:'smooth', block:'center' });
-    showToast('❌ กรุณาเลือกผลการตรวจสอบ', 'error');
-    return;
+    const grp=document.getElementById('toggleGroup'), err=document.getElementById('toggleErrorMsg');
+    grp.classList.add('error'); err.classList.add('show');
+    setTimeout(()=>grp.classList.remove('error'),400);
+    err.scrollIntoView({behavior:'smooth',block:'center'});
+    showToast('❌ กรุณาเลือกผลการตรวจสอบ','error'); return;
   }
 
-  // 2. Check required fields
+  // 2. Check required
   const required = this.querySelectorAll('[required]');
-  let valid = true, firstEl = null;
-  required.forEach(el => {
-    if (!el.value.trim()) {
-      if (!firstEl) firstEl = el;
-      valid = false;
-    }
-  });
-  if (!valid) {
-    firstEl.focus();
-    showToast('❌ กรุณากรอกข้อมูลที่จำเป็นให้ครบ', 'error');
-    return;
-  }
+  let valid=true, firstEl=null;
+  required.forEach(el=>{ if(!el.value.trim()){ if(!firstEl)firstEl=el; valid=false; }});
+  if (!valid) { firstEl.focus(); showToast('❌ กรุณากรอกข้อมูลที่จำเป็นให้ครบ','error'); return; }
 
-  // 3. Build payload
+  // 3. Build base payload
   const fd = new FormData(this);
   const payload = {};
-  fd.forEach((v,k) => payload[k] = String(v).trim());
+  fd.forEach((v,k)=>payload[k]=String(v).trim());
+  if (defectStatus==='none') {
+    payload.defectDetail='ไม่พบ defect';
+    payload.defectType='ไม่พบ defect';
+    // mcNo/size for no-defect: not applicable, send empty
+    payload.mcNo='';
+    payload.size='';
+  }
+
+  // 4. Collect boxes
+  let boxes = [];
+  // กรณีไม่พบ Defect ใช้ ndBoxesList
   if (defectStatus === 'none') {
-    payload.defectDetail = 'ไม่พบ defect';
-    payload.defectType = 'ไม่พบ defect';
+    document.querySelectorAll('#ndBoxesList .box-row').forEach(row => {
+      boxes.push({
+        mcNo:         row.querySelector('.nd-mcNo').value,
+        size:         row.querySelector('.nd-size').value,
+        defectDetail: 'ไม่พบ defect',
+        defectType:   'ไม่พบ defect',
+        boxNo:        row.querySelector('.nd-boxNo').value.trim(),
+        defectTime:   row.querySelector('.nd-defectTime').value,
+        palletNo:     row.querySelector('.nd-palletNo').value.trim(),
+        returnTime:   row.querySelector('.nd-returnTime').value,
+      });
+    });
   }
-
-  // 4. File
-  const file = fileInput.files[0];
-  if (file) {
-    payload.fileName = file.name; payload.fileType = file.type || 'application/octet-stream';
-    try { payload.fileData = await new Promise((res,rej) => { const r=new FileReader(); r.onload=e=>res(e.target.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); }); }
-    catch { showToast('❌ อ่านไฟล์ไม่สำเร็จ', 'error'); return; }
+  const boxRows = defectStatus === 'found' ? document.querySelectorAll('#boxesList .box-row') : [];
+  for (const row of Array.from(boxRows)) {
+    const bid = row.dataset.boxId;
+    const fileInput = row.querySelector('input[type=file]');
+    const ddSel = row.querySelector('.box-defectDetail');
+    const box = {
+      mcNo:         row.querySelector('.box-mcNo').value,
+      size:         row.querySelector('.box-size').value,
+      defectDetail: ddSel ? ddSel.value : '',
+      defectType:   ddSel ? (ddSel.options[ddSel.selectedIndex].dataset.type||'') : '',
+      boxNo:        row.querySelector('.box-boxNo').value.trim(),
+      defectTime:   row.querySelector('.box-defectTime').value,
+      palletNo:     row.querySelector('.box-palletNo').value.trim(),
+      returnTime:   row.querySelector('.box-returnTime').value,
+    };
+    const f = fileInput && fileInput.files[0];
+    if (f) {
+      box.fileName = f.name;
+      box.fileType = f.type || 'application/octet-stream';
+      try {
+        box.fileData = await new Promise((res,rej)=>{
+          const r=new FileReader(); r.onload=e=>res(e.target.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(f);
+        });
+      } catch { showToast('❌ อ่านไฟล์ไม่สำเร็จ','error'); return; }
+    }
+    boxes.push(box);
   }
+  if (defectStatus === 'none') payload.boxes = boxes;
+  else payload.boxes = boxes;
 
-  // Save sticky values before submit
-  const stickyShift = document.getElementById('shiftSel').value;
-  const stickyRound = document.getElementById('roundSelect').value;
-  const stickyMC = this.querySelector('[name=mcNo]').value;
-  const stickySize = this.querySelector('[name=size]').value;
-  const stickyRobot = document.getElementById('robotInput').value;
+  // Sticky values
+  const stickyShift=document.getElementById('shiftSel').value;
+  const stickyRound=document.getElementById('roundSelect').value;
+  const stickyMC='';
+  const stickySize='';
+  const stickyRobot=document.getElementById('robotInput').value;
 
   document.getElementById('overlay').classList.add('active');
-  document.getElementById('overlayStatus').textContent = 'กำลังส่งข้อมูล...';
-  document.getElementById('progressFill').style.width = '0%';
-  document.getElementById('progressPct').textContent = '0%';
-  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('overlayStatus').textContent='กำลังส่งข้อมูล...';
+  document.getElementById('progressFill').style.width='0%';
+  document.getElementById('progressPct').textContent='0%';
+  document.getElementById('submitBtn').disabled=true;
   startProgress();
 
   try {
-    const res = await fetch(SCRIPT_URL, {method:'POST', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)});
+    const res = await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
     const json = await res.json();
-    finishProgress(json.success !== false);
-    setTimeout(() => {
+    finishProgress(json.success!==false);
+    setTimeout(()=>{
       document.getElementById('overlay').classList.remove('active');
-      document.getElementById('submitBtn').disabled = false;
-      if (json.success !== false) {
-        showToast('✅ ส่งสำเร็จ! LINE แจ้งเตือนแล้ว', 'success');
-        // ── Partial reset (keep sticky values) ──
-        resetPartial(stickyShift, stickyRound, stickyMC, stickySize, stickyRobot);
+      document.getElementById('submitBtn').disabled=false;
+      if (json.success!==false) {
+        showToast('✅ ส่งสำเร็จ! LINE แจ้งเตือนแล้ว','success');
+        resetPartial(stickyShift,stickyRound,stickyMC,stickySize,stickyRobot);
       } else {
-        showToast('❌ ' + (json.error || 'เกิดข้อผิดพลาด'), 'error');
+        showToast('❌ '+(json.error||'เกิดข้อผิดพลาด'),'error');
       }
-    }, 900);
+    },900);
   } catch {
     finishProgress(false);
-    setTimeout(() => {
+    setTimeout(()=>{
       document.getElementById('overlay').classList.remove('active');
-      document.getElementById('submitBtn').disabled = false;
-      showToast('❌ เชื่อมต่อไม่ได้', 'error');
-    }, 900);
+      document.getElementById('submitBtn').disabled=false;
+      showToast('❌ เชื่อมต่อไม่ได้','error');
+    },900);
   }
 });
 
-// ── Partial reset: keep shift/round/mc/size/robot, clear only defect+file ──
-function resetPartial(shift, round, mc, size, robot) {
+// ── Partial reset ──
+function resetPartial(shift,round,mc,size,robot) {
   document.getElementById('defectForm').reset();
-  document.getElementById('date').valueAsDate = new Date();
-
-  // Restore sticky
-  document.getElementById('shiftSel').value = shift;
-  // Rebuild rounds
-  const sel = document.getElementById('roundSelect');
-  sel.innerHTML = '<option value="">— เลือกรอบตรวจ —</option>';
+  document.getElementById('date').valueAsDate=new Date();
+  document.getElementById('shiftSel').value=shift;
+  const sel=document.getElementById('roundSelect');
+  sel.innerHTML='<option value="">— เลือกรอบตรวจ —</option>';
   if (shift && ROUNDS[shift]) {
-    const allOpt = document.createElement('option');
-    allOpt.value = 'All น.'; allOpt.textContent = '✦ ทุกรอบ (All)';
-    sel.appendChild(allOpt);
-    ROUNDS[shift].forEach(r => {
-      const o = document.createElement('option');
-      o.value = r + ' น.'; o.textContent = r + ' น.';
-      sel.appendChild(o);
-    });
+    const a=document.createElement('option'); a.value='All น.'; a.textContent='✦ ทุกรอบ (All)'; sel.appendChild(a);
+    ROUNDS[shift].forEach(r=>{ const o=document.createElement('option'); o.value=r+' น.'; o.textContent=r+' น.'; sel.appendChild(o); });
   }
-  sel.value = round;
-  document.querySelector('[name=mcNo]').value = mc;
-  document.querySelector('[name=size]').value = size;
-  document.getElementById('robotInput').value = robot;
-
-  // Reset defect toggle
-  defectStatus = '';
-  document.getElementById('defectStatusInput').value = '';
+  sel.value=round;
+  // mc/size now per-box, no restore needed
+  document.getElementById('robotInput').value=robot;
+  defectStatus='';
+  document.getElementById('defectStatusInput').value='';
   document.getElementById('btnNoDefect').classList.remove('active');
   document.getElementById('btnFoundDefect').classList.remove('active');
   document.getElementById('defectSection').classList.add('hidden');
   document.getElementById('defectSection').classList.remove('visible');
-  document.getElementById('defectDetailRow').style.display = 'none';
-  document.getElementById('defectTypeInput').value = '';
-  document.getElementById('defectTypeBadge').style.display = 'none';
-  document.getElementById('toggleErrorMsg').classList.remove('show');
 
-  // Reset file
-  previewWrap.style.display = 'none';
-  document.getElementById('fileInfo').style.display = 'none';
+  document.getElementById('toggleErrorMsg').classList.remove('show');
+  document.getElementById('boxesList').innerHTML='';
+  boxCount=0;
+  document.getElementById('ndBoxesList').innerHTML='';
+  ndBoxCount=0;
+  document.getElementById('noDefectFields').style.display='none';
+  document.getElementById('foundRemark').style.display='grid';
 }
 </script>
 </body>
