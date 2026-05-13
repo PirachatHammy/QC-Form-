@@ -26,6 +26,17 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background:radial-gradi
 .blob3{width:200px;height:200px;background:radial-gradient(circle,#fde68a,#fbbf24);top:40%;right:5%;animation-delay:-5s;}
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(20px,-20px) scale(1.05);}66%{transform:translate(-10px,15px) scale(0.97);}}
 
+
+/* LIVE BADGE */
+.live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(239,68,68,0.10);border:1px solid rgba(239,68,68,0.3);border-radius:999px;padding:5px 14px;}
+.live-dot-wrap{position:relative;width:12px;height:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.live-ring1{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(239,68,68,0.22);animation:liveRing 1.6s ease-out infinite;}
+.live-ring2{position:absolute;width:32px;height:32px;border-radius:50%;background:rgba(239,68,68,0.08);animation:liveRing 1.6s ease-out infinite .35s;}
+.live-dot{width:12px;height:12px;border-radius:50%;background:#ef4444;display:block;animation:livePulse 1.4s ease-in-out infinite;}
+.live-text{font-size:12px;font-weight:700;color:#dc2626;letter-spacing:.12em;}
+.live-clock{font-family:'Chakra Petch',monospace;font-size:11px;color:var(--text3);}
+@keyframes liveRing{0%{transform:scale(.4);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.25)}}
 /* HEADER */
 .page-header{position:relative;z-index:10;padding:0 24px;background:linear-gradient(135deg,#4f46e5 0%,#6366f1 35%,#8b5cf6 65%,#06b6d4 100%);overflow:hidden;}
 .page-header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:40px;background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%);}
@@ -190,6 +201,17 @@ optgroup{background:#fff;color:#6366f1;}
     <div class="header-eyebrow">Quality Control · Defect Inspection</div>
     <h1>แบบฟอร์มตรวจกล่อง<br>และพาเลท Defect</h1>
     <p class="header-sub">กรอกข้อมูลให้ครบถ้วน · เพิ่มได้หลายกล่อง · แนบรูปต่อกล่อง</p>
+    <div style="margin-top:14px">
+      <div class="live-badge">
+        <div class="live-dot-wrap">
+          <span class="live-ring1"></span>
+          <span class="live-ring2"></span>
+          <span class="live-dot"></span>
+        </div>
+        <span class="live-text">LIVE</span>
+        <span class="live-clock" id="formClock">00:00:00</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -226,8 +248,17 @@ optgroup{background:#fff;color:#6366f1;}
           </div>
 
           <div class="field">
-            <label>Robot / ลูกกะ</label>
-            <input type="text" name="robot" id="robotInput" placeholder="ชื่อ Robot / ลูกกะ">
+            <label>ลูกกะ</label>
+            <select name="robot" id="robotInput">
+              <option value="">— เลือกลูกกะ —</option>
+              <option value="Amnat">Amnat</option>
+              <option value="Suriyun">Suriyun</option>
+              <option value="Siwakon">Siwakon</option>
+              <option value="Chaiphat">Chaiphat</option>
+              <option value="Rattanan">Rattanan</option>
+              <option value="Preecha">Preecha</option>
+              <option value="Pakphum">Pakphum</option>
+            </select>
           </div>
         </div>
       </div>
@@ -309,8 +340,8 @@ optgroup{background:#fff;color:#6366f1;}
             </select>
           </div>
           <div class="field">
-            <label>ลูกกะ / Robot</label>
-            <input type="text" name="customer" placeholder="ชื่อลูกกะ">
+            <label>Robot</label>
+            <input type="text" name="customer" placeholder="ชื่อ Robot">
           </div>
         </div>
       </div>
@@ -772,6 +803,17 @@ document.getElementById('defectForm').addEventListener('submit', async function(
 });
 
 // ── Partial reset ──
+// LIVE clock
+(function(){
+  function tick(){
+    const n=new Date();
+    const t=[n.getHours(),n.getMinutes(),n.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':');
+    const el=document.getElementById('formClock');
+    if(el) el.textContent=t;
+  }
+  tick(); setInterval(tick,1000);
+})();
+
 function resetPartial(shift,round,mc,size,robot) {
   document.getElementById('defectForm').reset();
   document.getElementById('date').valueAsDate=new Date();
